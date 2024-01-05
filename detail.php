@@ -1,8 +1,11 @@
 <?php
-$id = $_GET['id'];
+session_start();
 
 //0. function.phpを呼び出す
 require_once('function.php');
+loginCheck();
+
+$id = $_GET['id'];
 
 //1.  DB接続します
 $pdo = db_conn();

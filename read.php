@@ -26,8 +26,6 @@ require_once('function.php');
     $name = $_SESSION['name'];
     $name_kana = $_SESSION['name_kana'];
     $email = $_SESSION['email'];
-    $password1 = $_SESSION['password1'];
-    $password2 = $_SESSION['password2'];
     $time = $_SESSION['time'];
     ?>
     <h1>登録内容確認</h1>
@@ -43,7 +41,7 @@ require_once('function.php');
             <dt>【ご担当者様氏名】</dt><dd><?php echo h($name); ?></dd>
             <dt>【ご担当者様氏名（カナ）】</dt><dd><?php echo h($name_kana); ?></dd>
             <dt>【E-MAIL】</dt><dd><?php echo h($email); ?></dd>
-            <dt>【Password】</dt><dd><?php echo h($password1); ?></dd>
+            <dt>【Password】</dt><dd>パスワードは非表示です</dd>
         </dl>
     </div>
     <ul>

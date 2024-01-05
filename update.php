@@ -1,23 +1,26 @@
 <?php
-
+session_start();
 //0. function.phpを呼び出す
 require_once('function.php');
+loginCheck();
 
 //1. POSTデータ取得
 $jigyousyo = $_POST['jigyousyo'];
 $a_gata = isset($_POST['a_gata']) ? 'A型' . $_POST['a_gata'] : 'A型';
 $b_gata = isset($_POST['b_gata']) ? 'B型' . $_POST['b_gata'] : 'B型';
 $ikou = isset($_POST['ikou']) ? '移行' . $_POST['ikou'] : '移行';
-$other = isset($_POST['other']) ? 'その他' . $_POST['other']. "\n" : 'その他'. "\n";
-$postcode = isset($_POST['postcode']) ? $_POST['postcode']. "\n" : ''. "\n";
-$prefecture = isset($_POST['prefecture']) ? $_POST['prefecture']. "\n" : ''. "\n";
-$city = isset($_POST['city']) ? $_POST['city']. "\n" : ''. "\n";
-$town = isset($_POST['town']) ? $_POST['town']. "\n" : ''. "\n";
-$name = $_POST['name']. "\n";
-$name_kana = $_POST['name_kana']. "\n";
-$email = $_POST['email']. "\n";
-$password1 = $_POST['password1']. "\n";
-$id = $_POST["id"];
+$other = isset($_POST['other']) ? 'その他' . $_POST['other']: 'その他';
+$postcode = isset($_POST['postcode']) ? $_POST['postcode']: '';
+$prefecture = isset($_POST['prefecture']) ? $_POST['prefecture'] : '';
+$city = isset($_POST['city']) ? $_POST['city'] : '';
+$town = isset($_POST['town']) ? $_POST['town'] : '';
+$name = $_POST['name'];
+$name_kana = $_POST['name_kana'];
+$email = $_POST['email'];
+$password1 = $_POST['password1'];
+$id = $_POST['id'];
+
+$hashed_pw = password_hash($password1, PASSWORD_DEFAULT);
 
 //2. DB接続します
 $pdo = db_conn();
@@ -47,7 +50,7 @@ $stmt->bindValue(':town', $town, PDO::PARAM_STR);
 $stmt->bindValue(':name', $name, PDO::PARAM_STR);
 $stmt->bindValue(':name_kana', $name_kana, PDO::PARAM_STR);
 $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-$stmt->bindValue(':password', $password1, PDO::PARAM_STR);
+$stmt->bindValue(':password', $hashed_pw, PDO::PARAM_STR);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
 
 

@@ -1,6 +1,8 @@
 <?php
+session_start();
 //0. function.phpを呼び出す
 require_once('function.php');
+loginCheck();
 
 //1. GETデータ取得
 $id = $_GET['id'];

@@ -1,26 +1,28 @@
 <?php
 session_start();
-$sid = session_id();
+require_once('function.php');
+
 //1. POSTデータ取得
-$jigyousyo = $_POST['jigyousyo']. "\n";
+$jigyousyo = isset($_POST['jigyousyo']) ? $_POST['jigyousyo'] : '';
 $a_gata = isset($_POST['a_gata']) ? 'A型' . $_POST['a_gata'] : 'A型';
 $b_gata = isset($_POST['b_gata']) ? 'B型' . $_POST['b_gata'] : 'B型';
 $ikou = isset($_POST['ikou']) ? '移行' . $_POST['ikou'] : '移行';
-$other = isset($_POST['other']) ? 'その他' . $_POST['other']. "\n" : 'その他'. "\n";
-$postcode = isset($_POST['postcode']) ? $_POST['postcode']. "\n" : ''. "\n";
-$prefecture = isset($_POST['prefecture']) ? $_POST['prefecture']. "\n" : ''. "\n";
-$city = isset($_POST['city']) ? $_POST['city']. "\n" : ''. "\n";
-$town = isset($_POST['town']) ? $_POST['town']. "\n" : ''. "\n";
-$name = $_POST['name']. "\n";
-$name_kana = $_POST['name_kana']. "\n";
-$email = $_POST['email']. "\n";
-$password1 = $_POST['password1']. "\n";
-$password2 = $_POST['password2']. "\n";
-$time = date('Y/m/d H:i:s') . "\n";
+$other = isset($_POST['other']) ? 'その他' . $_POST['other']: 'その他';
+$postcode = isset($_POST['postcode']) ? $_POST['postcode'] : '';
+$prefecture = isset($_POST['prefecture']) ? $_POST['prefecture'] : '';
+$city = isset($_POST['city']) ? $_POST['city'] : '';
+$town = isset($_POST['town']) ? $_POST['town'] : '';
+$name = isset($_POST['name']) ? $_POST['name'] : '';
+$name_kana = isset($_POST['name_kana']) ? $_POST['name_kana'] : '';
+$email = isset($_POST['email']) ? $_POST['email'] : '';
+$password1 = isset($_POST['password1']) ? $_POST['password1'] : '';
+$password2 = isset($_POST['password2']) ? $_POST['password2'] : '';
+$time = date('Y/m/d H:i:s');
 $kanri_flg = 0;
 
+$hashed_pw = password_hash($password1, PASSWORD_DEFAULT);
+
 //2. DB接続します
-require_once('function.php');
 $pdo = db_conn();
 
 //3．データ登録SQL作成
@@ -31,7 +33,6 @@ VALUES (NULL, sysdate(), :jigyousyo, :officetype_a, :officetype_b, :officetype_i
 // 3-2. バインド変数を用意
 // Integer 数値の場合 PDO::PARAM_INT
 // String文字列の場合 PDO::PARAM_STR
-
 $stmt->bindValue(':jigyousyo', $jigyousyo, PDO::PARAM_STR);
 $stmt->bindValue(':officetype_a', $a_gata, PDO::PARAM_STR);
 $stmt->bindValue(':officetype_b', $b_gata, PDO::PARAM_STR);
@@ -44,7 +45,7 @@ $stmt->bindValue(':town', $town, PDO::PARAM_STR);
 $stmt->bindValue(':name', $name, PDO::PARAM_STR);
 $stmt->bindValue(':name_kana', $name_kana, PDO::PARAM_STR);
 $stmt->bindValue(':email', $email, PDO::PARAM_STR);
-$stmt->bindValue(':password', $password1, PDO::PARAM_STR);
+$stmt->bindValue(':password', $hashed_pw, PDO::PARAM_STR);
 $stmt->bindValue(':kanri_flg', $kanri_flg, PDO::PARAM_INT);
 
 // 3-3. 実行
@@ -70,8 +71,8 @@ $_SESSION['town'] = $town;
 $_SESSION['name'] = $name;
 $_SESSION['name_kana'] = $name_kana;
 $_SESSION['email'] = $email;
-$_SESSION['password1'] = $password1;
-$_SESSION['password2'] = $password2;
+// $_SESSION['password1'] = $password1;
+// $_SESSION['password2'] = $password2;
 $_SESSION['time'] = $time;
 ?>
 

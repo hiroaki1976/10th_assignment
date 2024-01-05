@@ -18,25 +18,48 @@ dt {
 }
 
 dd {
+    text-align: center;
     font-size: 24px;
     margin-bottom: 20px;
 }
 
 #myForm {
+    /* text-align: center; */
     margin: 50px auto;
-    width: 1000px;
+    width: 40%;
 }
 
-/* post.php */
+.width-height {
+    width: 600px;
+    height: 45px;
+}
+
+#submit {
+    display: block;
+    text-align: center;
+    margin: 45px auto;
+    width: 200px;
+    height: 50px;
+    font-size: 24px;
+    border: none;
+    background-color: aqua;
+    color: #222222;
+}
+
+
+/* index.php */
 .onegai {
     font-size: 24px;
     text-align: center;
-    color: orange;
+    color: red;
+}
+
+.red {
+    color: red;
 }
 
 dd input {
     font-size: 24px;
-    width: 400px;
 }
 
 #a_gata, #b_gata, #ikou, #other {
@@ -47,17 +70,6 @@ dd input {
     font-size: 24px;
     margin-bottom: 20px;
     color: green;
-}
-
-#submit {
-    display: block;
-    text-align: center;
-    margin: 0 auto;
-    width: 200px;
-    height: 50px;
-    font-size: 24px;
-    background-color: aqua;
-    color: #222222;
 }
 
 /* write.php */
@@ -72,7 +84,8 @@ ul li {
 }
 
 /* kanri.php */
-table {
+.kanri-table {
+    margin: 40px auto;
     width: 95%;
     border-collapse:  collapse; /* セルの線を重ねる */
 }
@@ -88,4 +101,18 @@ th {
 
 td {
     white-space: nowrap;
-  }
+}
+
+#logout a{
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    margin: 45px auto;
+    font-size: 28px;
+}
+
+/* login.php */
+.shinki-touroku {
+    text-align: center;
+    font-size: 28px;
+}

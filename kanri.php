@@ -1,15 +1,9 @@
 <?php
 session_start();
 
-if (  !isset($_SESSION['chk_ssid'])  ||  $_SESSION['chk_ssid']  !==  session_id()  ) {
-  exit('LOGIN ERROR');
-} else {
-  // ログイン済み処理
-  session_regenerate_id(true);
-  $_SESSION['chk_ssid'] = session_id();
-}
 //0. function.phpを呼び出す
 require_once('function.php');
+loginCheck();
 
 //1.  DB接続します
 $pdo = db_conn();
@@ -30,10 +24,14 @@ if ($status==false) {
   while( $result = $stmt->fetch(PDO::FETCH_ASSOC)){
     // .=で追記される
     $view .= "<tr>";
-    $view .= "<td>" . h($result['time']) . "</td>"."<td>". '<a href="detail.php?id=' . $result['id'] . '">' . h($result['jigyousyo']) . '</a>' . "</td>"."<td>". h($result['officetype_a']) . "</td>" . "<td>" . h($result['officetype_b']) . "</td>" . "<td>" . h($result['officetype_ikou']) . "</td>" . "<td>" . h($result['officetype_other']) . "</td>" . "<td>" . h($result['postcode']) . "</td>" . "<td>" . h($result['prefecture']) ."</td>" . "<td>" . h($result['city']) . "</td>" . "<td>" . h($result['town']) . "</td>" . "<td>" . h($result['name']) . "</td>" . "<td>" . h($result['name_kana']) . "</td>" . "<td>" .h($result['email']) ."</td>" . "<td>" . h($result['password']) ."</td>" . "<td>" . '<a href="delete.php?id=' . h($result['id']) . '">[削除]</a>' . "</td>";
+    $view .= "<td>" . h($result['time']) . "</td>"."<td>". '<a href="detail.php?id=' . $result['id'] . '">' . h($result['jigyousyo']) . '</a>' . "</td>"."<td>". h($result['officetype_a']) . "</td>" . "<td>" . h($result['officetype_b']) . "</td>" . "<td>" . h($result['officetype_ikou']) . "</td>" . "<td>" . h($result['officetype_other']) . "</td>" . "<td>" . h($result['postcode']) . "</td>" . "<td>" . h($result['prefecture']) ."</td>" . "<td>" . h($result['city']) . "</td>" . "<td>" . h($result['town']) . "</td>" . "<td>" . h($result['name']) . "</td>" . "<td>" . h($result['name_kana']) . "</td>" . "<td>" .h($result['email']) ."</td>" . "<td>" . h($result['kanri_flg']) . "</td>";
+    if ($_SESSION['kanri_flg'] === 1) {
+      $view .= "<td>" .'<a href="delete.php?id=' . h($result['id']) . '">[削除]</a>' . "</td>";
+    } else {
+      $view .= "<td>" . "</td>";
+    }
     $view .= "</tr>";
   }
-
 }
 ?>
 
@@ -52,12 +50,15 @@ if ($status==false) {
 <div>
     <div>
         <h1>登録ユーザー一覧</h1>
-        <table>
+        <table class="kanri-table">
             <tr>
-                <th>登録日時</th><th>事業所名</th><th>A型</th><th>B型</th><th>移行</th><th>その他</th><th>郵便番号</th><th>都道府県</th><th>市区町村</th><th>町名など</th><th>担当者名</th><th>担当者名カナ</th><th>E-mail</th><th>password</th><th>削除ボタン</th>
+                <th>登録日時</th><th>事業所名</th><th>A型</th><th>B型</th><th>移行</th><th>その他</th><th>郵便番号</th><th>都道府県</th><th>市区町村</th><th>町名など</th><th>担当者名</th><th>担当者名カナ</th><th>E-mail</th><th>管理者権限</th><th>削除ボタン</th>
             </tr>
                 <?= $view ?> <!--?php echo $view ?の省略記法 -->
         </table>
+    </div>
+    <div id="logout">
+      <a href="logout.php">Logout</a>
     </div>
 </div>
 

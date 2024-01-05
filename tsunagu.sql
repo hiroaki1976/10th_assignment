@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- ホスト: localhost
--- 生成日時: 2024 年 1 月 03 日 13:38
+-- 生成日時: 2024 年 1 月 05 日 11:33
 -- サーバのバージョン： 10.4.28-MariaDB
 -- PHP のバージョン: 8.2.4
 
@@ -27,9 +27,8 @@ SET time_zone = "+00:00";
 -- テーブルの構造 `gs_bm_table`
 --
 
-DROP TABLE IF EXISTS `gs_bm_table`;
-CREATE TABLE IF NOT EXISTS `gs_bm_table` (
-  `id` int(12) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `gs_bm_table` (
+  `id` int(12) NOT NULL,
   `time` datetime NOT NULL,
   `jigyousyo` varchar(256) NOT NULL,
   `officetype_a` varchar(32) DEFAULT NULL,
@@ -44,25 +43,39 @@ CREATE TABLE IF NOT EXISTS `gs_bm_table` (
   `name_kana` varchar(128) NOT NULL,
   `email` varchar(128) NOT NULL,
   `password` varchar(256) NOT NULL,
-  `kanri_flg` int(1) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `kanri_flg` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- テーブルのデータのダンプ `gs_bm_table`
 --
 
 INSERT INTO `gs_bm_table` (`id`, `time`, `jigyousyo`, `officetype_a`, `officetype_b`, `officetype_ikou`, `officetype_other`, `postcode`, `prefecture`, `city`, `town`, `name`, `name_kana`, `email`, `password`, `kanri_flg`) VALUES
-(5, '2023-12-14 17:31:46', 'かきくけこ〜', 'A型on', 'B型', '移行', 'その他\n', '0040021\n', '北海道\n', '札幌市厚別区\n', '青葉町\n', '横田裕明\n', 'ヨコタヒロアキ\n', 'yokota2h@gmail.com\n', 'yokotadayo\n', 0),
-(7, '2023-12-14 18:32:42', 'たちつてと\n', 'A型', 'B型', '移行on', 'その他\n', '0040031\n', '北海道\n', '札幌市厚別区\n', '上野幌一条\n', '横田裕明\n', 'ヨコタヒロアキ\n', 'yokota2h@gmail.com\n', 'yokota\n', 0),
-(11, '2023-12-16 23:27:00', 'まみむめも\n', 'A型on', 'B型on', '移行on', 'その他on\n', '0600002\n', '北海道\n', '札幌市中央区\n', '北二条西\n', '横田裕明\n', 'ヨコタヒロアキ\n', 'yokota2h@gmail.com\n', 'yokotadayo\n', 0),
-(12, '2023-12-16 23:33:19', 'なにぬねの\n', 'A型on', 'B型on', '移行on', 'その他on\n', '0600003\n', '北海道\n', '札幌市中央区\n', '北三条西\n', '横田裕明\n', 'ヨコタヒロアキ\n', 'yokota2h@gmail.com\n', 'yokota2h@\n', 0),
-(15, '2023-12-17 13:01:15', '電気グルーヴ', 'A型on', 'B型on', '移行', 'その他\n', '0600005\n', '北海道\n', '札幌市中央区\n', '北五条西１−１\n', '横田裕明\n', 'ヨコタヒロアキ\n', 'yokota2h@gmail.com\n', 'yokota2h@\n', 0),
-(16, '2023-12-17 13:11:15', 'Oasis Create', 'A型', 'B型on', '移行', 'その他\n', '0600006\n', '北海道\n', '札幌市中央区\n', '北六条西2-2\n', '横田裕明\n', 'ヨコタヒロアキ\n', 'yokota2h@gmail.com\n', 'yokotadayo\n', 0),
-(18, '2023-12-19 07:05:10', 'テスト2023', 'A型on', 'B型', '移行on', 'その他\n', '0040033\n', '北海道\n', '札幌市厚別区\n', '上野幌三条\n', '横田裕明\n', 'ヨコタヒロアキ\n', 'yokota22h@yahoo.co.jp', 'yokota2h\n', 1),
-(20, '2023-12-21 21:47:56', '電気グルーヴ！！', 'A型on', 'B型', '移行on', 'その他\n', '0600007\n', '北海道\n', '札幌市中央区\n', '北七条西\n', '横田裕明\n', 'ヨコタヒロアキ\n', 'yokota2h@gmail.com\n', 'yokotadayo\n', 0),
-(23, '2024-01-02 15:33:24', 'テスト2024\n', 'A型on', 'B型', '移行', 'その他\n', '0040041\n', '北海道\n', '札幌市厚別区\n', '大谷地東\n', '横田　裕明\n', 'ヨコタ　ヒロアキ\n', 'yokota2h@gmail.com\n', 'yokotadayo\n', 0),
-(24, '2024-01-03 12:57:26', 'テスト2025\n', 'A型on', 'B型on', '移行on', 'その他on\n', '0040051\n', '北海道\n', '札幌市厚別区\n', '厚別中央一条\n', '横田裕明\n', 'ヨコタヒロアキ\n', 'yokota22h@yahoo.co.jp\n', 'yokota\n', 0);
+(24, '2024-01-03 12:57:26', 'テスト2025', 'A型on', 'B型on', '移行on', 'その他', '0040051', '北海道', '札幌市厚別区', '厚別中央一条', '横田裕明', 'ヨコタヒロアキ', 'yokota22h@yahoo.co.jp', '$2y$10$zlQvoADiUz.nIyRzNmx5D.vuEHfPO6HpNR1dM580tu31MEFlOt7XC', 1),
+(25, '2024-01-03 20:26:34', 'テスト2023', 'A型on', 'B型', '移行', 'その他on', '0040022', '北海道', '札幌市厚別区', '厚別南', '横田裕明', 'ヨコタヒロアキ', '1@gmail.com', '$2y$10$aNycH.c1HioJEoXkD9UcL.fdD6qvVwrAz7oB60m7hruszGrIhcD5K', 0),
+(27, '2024-01-03 22:26:43', 'かきくけこ', 'A型', 'B型on', '移行', 'その他on', '0040071', '北海道', '札幌市厚別区', '厚別北一条', '横田裕明', 'ヨコタヒロアキ', '2@gmail.com', '$2y$10$qqLul2itBFXVswHfaA3AVudRVISlppc0tvpXf7sWDQOmpLejzjBPG', 0),
+(28, '2024-01-04 21:24:25', 'さしすせそ', 'A型', 'B型', '移行on', 'その他', '060-0001', '北海道', '札幌市中央区', '北一条西', '横田裕明', 'ヨコタヒロアキ', '3@gmail.com', '$2y$10$.QRnQvnWuGAX/xM3hxQrDOF4hMSt2UKtGVOo50zt.WMIhZtzFeiqG', 0),
+(30, '2024-01-04 23:04:50', 'あいうえお', 'A型on', 'B型on', '移行on', 'その他', '0600010', '北海道', '札幌市中央区', '北十条西', '横田裕明', 'ヨコタヒロアキ', '4@gmail.com', '$2y$10$ekNSRD1To6/0B.Vzz.Z/Qui5Qmvwz.Q.rBi00S1baaKJBDsr1f3Bm', 0);
+
+--
+-- ダンプしたテーブルのインデックス
+--
+
+--
+-- テーブルのインデックス `gs_bm_table`
+--
+ALTER TABLE `gs_bm_table`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- ダンプしたテーブルの AUTO_INCREMENT
+--
+
+--
+-- テーブルの AUTO_INCREMENT `gs_bm_table`
+--
+ALTER TABLE `gs_bm_table`
+  MODIFY `id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
